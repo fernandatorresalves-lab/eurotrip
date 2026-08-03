@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nina, Miguelito, Feñi + Benja — Europa 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFF8ED;
+    --paper-alt:#FFF1D6;
+    --ink:#123A42;
+    --ink-soft:#5B5872;
+    --coral:#D96B3A;
+    --coral-dark:#9C4823;
+    --sun:#F2C14E;
+    --sun-dark:#96731A;
+    --teal:#1C9C94;
+    --teal-dark:#0E5F5A;
+    --ocean:#1E86A8;
+    --ocean-dark:#145066;
+    --plum:#E0715A;
+    --plum-dark:#A8452F;
+    --grass:#5B8C3E;
+    --grass-dark:#33501F;
+    --line: rgba(27,26,46,0.14);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{
+    font-family:'Bricolage Grotesque', sans-serif;
+    font-weight:800;
+    margin:0;
+    letter-spacing:-0.015em;
+  }
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--coral-dark);
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+  a{color:inherit;}
+  img{display:block; max-width:100%;}
+  .hero img, .city-photo img{
+    filter:saturate(1.25) contrast(1.06) brightness(1.02);
+  }
+
+  /* color helpers per section */
+  .c-coral{--accent:var(--coral); --accent-dark:var(--coral-dark);}
+  .c-teal{--accent:var(--teal); --accent-dark:var(--teal-dark);}
+  .c-ocean{--accent:var(--ocean); --accent-dark:var(--ocean-dark);}
+  .c-plum{--accent:var(--plum); --accent-dark:var(--plum-dark);}
+  .c-grass{--accent:var(--grass); --accent-dark:var(--grass-dark);}
+  .c-sun{--accent:var(--sun); --accent-dark:var(--sun-dark);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex;
+    align-items:flex-end;
+    background:var(--ink);
+    overflow:hidden;
+  }
+  .hero img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    opacity:0.92;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, rgba(217,107,58,0.42) 0%, rgba(28,156,148,0.32) 38%, rgba(18,58,66,0.80) 100%);
+  }
+  .hero-content{
+    position:relative;
+    z-index:2;
+    color:#FFF8ED;
+    padding:64px 24px 52px;
+    width:100%;
+    max-width:1040px;
+    margin:0 auto;
+  }
+  .hero .eyebrow{color:var(--sun);}
+  .hero h1{
+    font-size:clamp(38px, 7vw, 72px);
+    line-height:1.02;
+    margin:12px 0 16px;
+    text-transform:uppercase;
+  }
+  .hero-dates{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:15px;
+    color:#FFEFDC;
+    background:rgba(255,90,60,0.85);
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:6px;
+    margin-bottom:18px;
+  }
+  .hero-note{
+    font-size:15px;
+    max-width:480px;
+    color:#FFEFDC;
+    border-left:3px solid var(--sun);
+    padding-left:14px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav{
+    position:sticky; top:0; z-index:10;
+    background:var(--ink);
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .nav-inner{
+    max-width:1040px; margin:0 auto;
+    padding:14px 24px;
+    display:flex; gap:22px;
+  }
+  .nav a{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:#CFCBE8;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .nav a:hover{color:var(--sun);}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:68px 0;}
+  section.alt{background:var(--paper-alt);}
+  .section-head{margin-bottom:32px;}
+  .section-head .eyebrow{margin-bottom:8px; display:block;}
+  .section-head h2{font-size:clamp(28px,3.6vw,40px);}
+  .section-head p{color:var(--ink-soft); margin-top:10px; max-width:560px;}
+
+  /* ---------- ROUTE MAP ---------- */
+  .route{
+    display:flex;
+    overflow-x:auto;
+    gap:0;
+    padding-bottom:14px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .route-stop{
+    flex:0 0 auto;
+    width:150px;
+    text-align:center;
+    position:relative;
+    padding:0 6px;
+  }
+  .route-stop .stamp{
+    width:66px; height:66px;
+    border-radius:50%;
+    border:3px solid var(--accent, var(--coral));
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 10px;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:11px;
+    color:var(--accent-dark, var(--coral-dark));
+    background:#fff;
+    transform:rotate(-3deg);
+  }
+  .route-stop:nth-child(4n) .stamp{transform:rotate(3deg);}
+  .route-stop.transit .stamp{
+    border-style:dashed;
+    color:var(--ink-soft);
+    border-color:var(--ink-soft);
+    background:transparent;
+  }
+  .route-stop .city{font-weight:700; font-size:14px;}
+  .route-stop .nights{font-size:12px; color:var(--ink-soft); font-family:'Space Mono', monospace;}
+  .route-connector{
+    flex:0 0 auto;
+    width:44px;
+    display:flex; align-items:center; justify-content:center;
+    padding-top:24px;
+    color:var(--coral);
+    font-size:18px;
+    font-weight:700;
+  }
+
+  /* ---------- BADGES ---------- */
+  .badge{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:5px 12px;
+    border-radius:20px;
+    color:#fff;
+  }
+  .badge.confirmed{background:var(--grass);}
+  .badge.pending{background:var(--coral);}
+  .badge-dot{width:6px; height:6px; border-radius:50%; background:#fff;}
+
+  /* ---------- CITY BLOCK ---------- */
+  .city-block{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:36px;
+    align-items:start;
+    padding:48px 0;
+    border-top:3px solid var(--accent, var(--coral));
+  }
+  .city-block:first-of-type{border-top:none;}
+  .city-photo{
+    border-radius:14px;
+    overflow:hidden;
+    aspect-ratio:4/3;
+  }
+  .city-photo img{width:100%; height:100%; object-fit:cover;}
+  .city-info .eyebrow{margin-bottom:6px; display:block; color:var(--accent-dark, var(--coral-dark));}
+  .city-info h3{font-size:30px; margin-bottom:4px;}
+  .city-info .meta{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+
+  /* ---------- TICKET ---------- */
+  .ticket{
+    background:#fff;
+    border:2px solid var(--line);
+    border-left:6px solid var(--accent, var(--coral));
+    border-radius:10px;
+    padding:14px 16px;
+    margin-bottom:18px;
+    position:relative;
+  }
+  .ticket-row{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+  }
+  .ticket-leg{text-align:center;}
+  .ticket-time{font-family:'Space Mono', monospace; font-size:20px; font-weight:700;}
+  .ticket-place{font-size:12px; color:var(--ink-soft); margin-top:2px; font-weight:500;}
+  .ticket-mid{
+    flex:1;
+    display:flex; flex-direction:column; align-items:center;
+    gap:4px;
+  }
+  .ticket-mid .dur{font-size:11px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-weight:700;}
+  .ticket-line{width:100%; height:2px; background:var(--line); position:relative;}
+  .ticket-foot{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:12px; padding-top:10px; border-top:2px dashed var(--line);
+  }
+  .ticket-mode{
+    font-family:'Space Mono', monospace; font-weight:700; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.05em; color:var(--ink-soft);
+  }
+
+  .scenic{
+    background:var(--paper-alt);
+    border-left:4px solid var(--sun);
+    border-radius:0 10px 10px 0;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:18px;
+  }
+  .scenic strong{color:var(--ink);}
+
+  .plans h4{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--accent-dark, var(--coral-dark));
+    margin-bottom:10px;
+  }
+  .plans ul{margin:0; padding:0; list-style:none;}
+  .plans li{
+    padding:9px 0;
+    border-bottom:2px solid var(--line);
+    font-size:15px;
+    font-weight:500;
+  }
+  .plans li:last-child{border-bottom:none;}
+
+  /* transit mini block */
+  .transit-block{
+    padding:32px 0;
+    display:flex; gap:20px; align-items:flex-start;
+  }
+  .transit-icon{
+    flex:0 0 auto;
+    width:42px; height:42px;
+    border-radius:50%;
+    border:2px dashed var(--ink-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-soft);
+    margin-top:4px;
+    font-weight:700;
+  }
+  .transit-block h4{font-family:'Bricolage Grotesque', sans-serif; font-weight:800; font-size:19px; margin-bottom:4px;}
+  .transit-block p{font-size:14px; color:var(--ink-soft); margin:0 0 10px;}
+
+  /* ---------- DECISION ---------- */
+  .decision-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+  .decision-card{
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:24px;
+  }
+  .decision-card h3{font-size:22px; margin-bottom:4px;}
+  .decision-card .sub{font-size:13px; color:var(--ink-soft); font-family:'Space Mono', monospace; font-weight:700; margin-bottom:16px;}
+  .decision-card ul{margin:0; padding:0; list-style:none;}
+  .decision-card li{
+    font-size:14px;
+    font-weight:500;
+    padding:6px 0 6px 22px;
+    position:relative;
+    color:var(--ink-soft);
+  }
+  .decision-card li::before{
+    content:"—";
+    position:absolute; left:0; color:var(--coral);
+    font-weight:700;
+  }
+
+  /* ---------- PRACTICAL ---------- */
+  .practical-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:28px;
+  }
+  .practical-card{
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:22px;
+  }
+  .practical-card h4{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size:12px; text-transform:uppercase; letter-spacing:0.06em;
+    margin-bottom:12px;
+    color:var(--coral-dark);
+  }
+  .practical-card ul{margin:0; padding:0; list-style:none;}
+  .practical-card li{
+    font-size:14px; font-weight:500; padding:7px 0;
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    border-bottom:2px solid var(--line);
+  }
+  .practical-card li:last-child{border-bottom:none;}
+  .note-box{
+    background:var(--sun);
+    border-radius:14px;
+    padding:20px 22px;
+    font-size:14px;
+    color:var(--sun-dark);
+    font-weight:500;
+  }
+  .note-box strong{color:var(--ink);}
+
+  footer{
+    padding:44px 0 60px;
+    text-align:center;
+    color:#fff;
+    background:var(--ink);
+    font-size:13px;
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    letter-spacing:0.08em;
+  }
+
+  @media (max-width: 760px){
+    .city-block{grid-template-columns:1fr; gap:20px;}
+    .decision-grid, .practical-grid{grid-template-columns:1fr;}
+    .hero{min-height:78vh;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img src="images/banner.jpg" alt="Nina, Miguelito, Feñi y Benja">
+  <div class="hero-content">
+    <span class="eyebrow">Un viaje por Europa</span>
+    <h1>Nina, Miguelito, Feñi + Benja</h1>
+    <div class="hero-dates">29 OCT — 18 NOV 2026</div>
+    <p class="hero-note">Benja se suma la primera semana del viaje — hasta dónde exactamente, todavía lo vamos a definir sobre la marcha.</p>
+  </div>
+</div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#ruta">Ruta</a>
+    <a href="#paris">París</a>
+    <a href="#lucerna">Lucerna</a>
+    <a href="#sirmione">Sirmione</a>
+    <a href="#venecia">Venecia</a>
+    <a href="#roma">Roma</a>
+    <a href="#amalfitana">Costa Amalfitana</a>
+    <a href="#decision">Sevilla o Toledo</a>
+    <a href="#madrid">Madrid</a>
+    <a href="#practico">Datos prácticos</a>
+  </div>
+</nav>
+
+<section id="ruta">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">El recorrido</span>
+      <h2>20 días, 8 paradas y una parada de tránsito</h2>
+      <p>El itinerario completo, ciudad por ciudad. Los sellos con línea punteada son paradas cortas de medio día, sin noche.</p>
+    </div>
+    <div class="route">
+      <div class="route-stop c-coral">
+        <div class="stamp">MAD</div>
+        <div class="city">Madrid</div>
+        <div class="nights">llegada</div>
+      </div>
+      <div class="route-connector">✈</div>
+      <div class="route-stop c-coral">
+        <div class="stamp">PAR</div>
+        <div class="city">París</div>
+        <div class="nights">3 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop transit">
+        <div class="stamp">ZRH</div>
+        <div class="city">Zúrich</div>
+        <div class="nights">medio día</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-teal">
+        <div class="stamp">LUC</div>
+        <div class="city">Lucerna</div>
+        <div class="nights">2 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-ocean">
+        <div class="stamp">SIR</div>
+        <div class="city">Sirmione</div>
+        <div class="nights">2 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-plum">
+        <div class="stamp">VCE</div>
+        <div class="city">Venecia</div>
+        <div class="nights">2 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-coral">
+        <div class="stamp">ROM</div>
+        <div class="city">Roma</div>
+        <div class="nights">3 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-ocean">
+        <div class="stamp">AMA</div>
+        <div class="city">Costa Amalfitana</div>
+        <div class="nights">2 noches</div>
+      </div>
+      <div class="route-connector">✈</div>
+      <div class="route-stop c-sun">
+        <div class="stamp">SEV/MAD</div>
+        <div class="city">Sevilla o Toledo</div>
+        <div class="nights">2 noches</div>
+      </div>
+      <div class="route-connector">—</div>
+      <div class="route-stop c-grass">
+        <div class="stamp">MAD</div>
+        <div class="city">Madrid</div>
+        <div class="nights">2-3 noches</div>
+      </div>
+      <div class="route-connector">✈</div>
+      <div class="route-stop c-plum">
+        <div class="stamp">SCL</div>
+        <div class="city">Vuelta a Chile</div>
+        <div class="nights">18 nov</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARIS -->
+<section id="paris" class="alt">
+  <div class="wrap">
+    <div class="city-block c-coral">
+      <div class="city-photo"><img src="images/paris.jpg" alt="París"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 1 · con Benja</span>
+        <h3>París</h3>
+        <div class="meta">29 oct — 1 nov · 3 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">17:00</div>
+              <div class="ticket-place">Madrid</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">✈ vuelo interno · ~2h10</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">~21:30</div>
+              <div class="ticket-place">París</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">Madrid → París · 29 oct, noche</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>Ojo con el margen:</strong> llegan a Madrid a las 17:00 desde Chile, así que el vuelo a París conviene reservarlo con al menos 2 horas de diferencia por si hay demora en migración o equipaje.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Torre Eiffel — vista de día y de noche iluminada</li>
+            <li>Museo del Louvre o Musée d'Orsay</li>
+            <li>Paseo por Montmartre y Sacré-Cœur</li>
+            <li>Crucero corto por el Sena</li>
+            <li>Barrio Le Marais — paseo y compras</li>
+            <li>Café en una terraza clásica (Café de Flore, Les Deux Magots)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ZURICH TRANSIT -->
+<section>
+  <div class="wrap">
+    <div class="transit-block">
+      <div class="transit-icon">✈</div>
+      <div style="flex:1">
+        <h4>De paso por Zúrich</h4>
+        <p>Medio día en tránsito antes de seguir a Lucerna. No hay noche acá, pero vale la pena bajarse a caminar un rato.</p>
+        <div class="city-photo" style="max-width:320px; margin-bottom:14px;"><img src="images/zurich.jpg" alt="Zúrich"></div>
+        <div class="plans" style="max-width:480px;">
+          <h4>Con esas horas libres</h4>
+          <ul>
+            <li>Paseo junto al lago de Zúrich</li>
+            <li>Casco histórico (Altstadt) y la Bahnhofstrasse</li>
+            <li>Iglesia Fraumünster (vitrales de Chagall)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LUCERNA -->
+<section id="lucerna" class="alt">
+  <div class="wrap">
+    <div class="city-block c-teal">
+      <div class="city-photo"><img src="images/lucerna.jpg" alt="Lucerna"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 2 · con Benja (a definir hasta cuándo)</span>
+        <h3>Lucerna</h3>
+        <div class="meta">1 — 3 nov · 2 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">París</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">🚄 vía Zúrich · ~4h45</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">Lucerna</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">TGV Lyria directo</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>Vista del trayecto:</strong> campiña francesa llana, y cerca de Basilea empiezan a asomar las primeras colinas y lagos suizos.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Puente de la Capilla (Kapellbrücke) y casco antiguo</li>
+            <li>Monte Pilatus o Rigi — teleférico con vistas alpinas</li>
+            <li>Paseo en barco por el Lago de Lucerna</li>
+            <li>León de Lucerna</li>
+            <li>Chocolate y relojes suizos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIRMIONE -->
+<section id="sirmione">
+  <div class="wrap">
+    <div class="city-block c-ocean">
+      <div class="city-photo"><img src="images/sirmione.jpg" alt="Sirmione"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 3</span>
+        <h3>Sirmione</h3>
+        <div class="meta">3 — 5 nov · 2 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">08:30</div>
+              <div class="ticket-place">Lucerna</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">🚄 vía Milán · ~5h</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">~13:30</div>
+              <div class="ticket-place">Sirmione</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">1 trasbordo en Milano Centrale + bus/taxi desde Desenzano</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>El tramo más espectacular del viaje:</strong> el tren bordea el Lago de Lucerna y cruza los Alpes suizos por el Paso del Gotardo — montañas nevadas, valles y muchos túneles. Vale la pena ir con asiento junto a la ventana. Al bajar hacia Italia aparecen los primeros lagos italianos, hasta la llanura de Milán.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Castillo Scaligero</li>
+            <li>Grotte di Catullo — ruinas romanas con vista al Lago di Garda</li>
+            <li>Termas de Sirmione</li>
+            <li>Paseo por el centro histórico peatonal</li>
+            <li>Excursión opcional a Peschiera o Desenzano</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VENECIA -->
+<section id="venecia" class="alt">
+  <div class="wrap">
+    <div class="city-block c-plum">
+      <div class="city-photo"><img src="images/venecia.jpg" alt="Venecia"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 4</span>
+        <h3>Venecia</h3>
+        <div class="meta">5 — 7 nov · 2 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">10:00</div>
+              <div class="ticket-place">Desenzano</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">🚄 vía Verona · ~2h15</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">~12:15</div>
+              <div class="ticket-place">Venecia</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">1 trasbordo en Verona Porta Nuova</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>Vista del trayecto:</strong> llanura del Véneto con viñedos (zona de Valpolicella). El tramo final cruza la laguna véneta con agua a ambos lados del tren — buen momento para fotos.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Plaza y Basílica de San Marcos</li>
+            <li>Palacio Ducal</li>
+            <li>Paseo en góndola por los canales</li>
+            <li>Puente de Rialto y mercado</li>
+            <li>Islas de Murano y Burano</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROMA -->
+<section id="roma">
+  <div class="wrap">
+    <div class="city-block c-coral">
+      <div class="city-photo"><img src="images/roma.jpg" alt="Roma"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 5</span>
+        <h3>Roma</h3>
+        <div class="meta">7 — 10 nov · 3 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">09:00</div>
+              <div class="ticket-place">Venecia S.L.</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">🚄 Frecciarossa directo · ~3h25</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">~12:25</div>
+              <div class="ticket-place">Roma Termini</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">Alta velocidad, sin trasbordos</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>Vista del trayecto:</strong> campiña de Emilia-Romaña y Toscana — colinas suaves, viñedos y cipreses, especialmente lindo entre Bologna y Florencia.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Coliseo y Foro Romano</li>
+            <li>Vaticano — Basílica de San Pedro y Museos Vaticanos</li>
+            <li>Fontana di Trevi, Panteón, Piazza Navona</li>
+            <li>Trastevere — paseo de noche</li>
+            <li>Villa Borghese (opcional)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COSTA AMALFITANA -->
+<section id="amalfitana" class="alt">
+  <div class="wrap">
+    <div class="city-block c-ocean">
+      <div class="city-photo"><img src="images/costaamalfitana.jpg" alt="Costa Amalfitana"></div>
+      <div class="city-info">
+        <span class="eyebrow">Parada 6</span>
+        <h3>Costa Amalfitana</h3>
+        <div class="meta">10 — 12 nov · 2 noches</div>
+
+        <div class="ticket">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">09:00</div>
+              <div class="ticket-place">Roma Termini</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">🚄 + traslado · ~2h15 total</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">~11:30</div>
+              <div class="ticket-place">Sorrento/Positano</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">Tren a Nápoles (~1h10) + traslado en auto o Circumvesuviana</span>
+            <span class="badge pending"><span class="badge-dot"></span>por reservar</span>
+          </div>
+        </div>
+
+        <div class="scenic"><strong>Vista del trayecto:</strong> campos de Lazio y Campania, y en el tramo final se puede alcanzar a ver el Vesubio a la distancia si el día está despejado.</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Positano — pueblo, miradores y playa</li>
+            <li>Amalfi — Duomo di Sant'Andrea</li>
+            <li>Ravello — jardines de Villa Rufolo con vista al mar</li>
+            <li>Recorrido en auto o barco por la costa</li>
+            <li>Capri — excursión de día completo (opcional)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION -->
+<section id="decision">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">La decisión pendiente</span>
+      <h2>¿Sevilla o Toledo?</h2>
+      <p>Antes de llegar a Madrid para cerrar el viaje, hay dos caminos posibles. Ninguno está decidido — esto es solo para ir viendo opciones.</p>
+    </div>
+    <div class="decision-grid">
+      <div class="decision-card c-sun">
+        <div class="city-photo" style="aspect-ratio:16/9; margin-bottom:16px;"><img src="images/sevilla.jpg" alt="Sevilla"></div>
+        <h3>Opción A · Sevilla</h3>
+        <div class="sub">Nápoles → Sevilla (avión, con escala) → Madrid</div>
+        <ul>
+          <li>2 noches propias en Sevilla, ciudad completamente nueva en el itinerario</li>
+          <li>Real Alcázar, Catedral y Giralda, Barrio de Santa Cruz</li>
+          <li>Espectáculo de flamenco</li>
+          <li>Vuelo Nápoles-Sevilla no es directo — probable escala en Madrid o Roma (~4-5h total)</li>
+        </ul>
+      </div>
+      <div class="decision-card c-grass">
+        <div class="city-photo" style="aspect-ratio:16/9; margin-bottom:16px;"><img src="images/toledo.jpg" alt="Toledo"></div>
+        <h3>Opción B · Toledo</h3>
+        <div class="sub">Nápoles → Madrid (avión directo, ~2h40) → excursión a Toledo</div>
+        <ul>
+          <li>Vuelo directo desde Nápoles, más simple y corto</li>
+          <li>Toledo como excursión de un día desde Madrid, sin cambiar de hotel</li>
+          <li>Catedral de Toledo, casco histórico amurallado, Alcázar</li>
+          <li>Más tiempo neto en Madrid en vez de repartido en dos ciudades</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MADRID -->
+<section id="madrid" class="alt">
+  <div class="wrap">
+    <div class="city-block c-grass">
+      <div class="city-photo"><img src="images/madrid.jpg" alt="Madrid"></div>
+      <div class="city-info">
+        <span class="eyebrow">Última parada</span>
+        <h3>Madrid</h3>
+        <div class="meta">14 — 16 o 17 nov · 2 o 3 noches (según la opción elegida)</div>
+
+        <div class="plans">
+          <h4>Planes posibles</h4>
+          <ul>
+            <li>Museo del Prado y/o Reina Sofía</li>
+            <li>Palacio Real</li>
+            <li>Parque del Retiro</li>
+            <li>Mercado de San Miguel — tapas</li>
+            <li>Gran Vía y Puerta del Sol</li>
+            <li>Plaza Mayor</li>
+          </ul>
+        </div>
+
+        <div class="ticket" style="margin-top:18px;">
+          <div class="ticket-row">
+            <div class="ticket-leg">
+              <div class="ticket-time">Madrid</div>
+            </div>
+            <div class="ticket-mid">
+              <div class="dur">✈ vuelo internacional</div>
+              <div class="ticket-line"></div>
+            </div>
+            <div class="ticket-leg">
+              <div class="ticket-time">Chile</div>
+            </div>
+          </div>
+          <div class="ticket-foot">
+            <span class="ticket-mode">18 de noviembre, noche</span>
+            <span class="badge confirmed"><span class="badge-dot"></span>comprado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICO -->
+<section id="practico">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Antes de viajar</span>
+      <h2>Datos prácticos</h2>
+    </div>
+
+    <div class="practical-grid">
+      <div class="practical-card">
+        <h4>Vuelos comprados</h4>
+        <ul>
+          <li><span>Ida — llegada a Madrid</span><span class="badge confirmed">29 oct, 17:00</span></li>
+          <li><span>Vuelta — desde Madrid</span><span class="badge confirmed">18 nov, noche</span></li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <h4>Todavía por reservar</h4>
+        <ul>
+          <li><span>Madrid → París</span><span class="badge pending">vuelo</span></li>
+          <li><span>Todos los trenes del recorrido</span><span class="badge pending">tren</span></li>
+          <li><span>Nápoles → Sevilla o Madrid</span><span class="badge pending">vuelo</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <strong>Por qué las fechas tienen algo de margen:</strong> como los trenes todavía no están comprados, dejamos un día de colchón en el itinerario. Así, si algún horario real termina siendo distinto al estimado, no se complica la conexión con el vuelo de vuelta del 18 de noviembre. Ese margen se puede ir absorbiendo en la ciudad que más lo necesite, o quedar como día libre.
+    </div>
+  </div>
+</section>
+
+<footer>
+  BUEN VIAJE — NINA · MIGUELITO · FEÑI · BENJA
+</footer>
+
+</body>
+</html>
